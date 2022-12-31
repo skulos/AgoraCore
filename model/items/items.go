@@ -17,6 +17,7 @@ type ItemInterface interface {
 
 type Item struct {
 	ID          int64
+	QTY         int64
 	Description string
 	UnitCost    decimal.Decimal
 	Price       decimal.Decimal
