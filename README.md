@@ -9,3 +9,5 @@ docker run --name postgres --env=POSTGRES_PASSWORD=password --env=PGDATA=/var/li
 
 
 # Versions
+v0.0.0 - Empty project
+v0.0.1 - Initial data modeling
