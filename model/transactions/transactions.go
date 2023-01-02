@@ -1,6 +1,7 @@
 package transactions
 
 import (
+	"encoding/json"
 	"time"
 
 	"github.com/shopspring/decimal"
@@ -24,12 +25,13 @@ Total
 */
 // DateTime time.Time
 type Transaction struct {
-	TxID        int64
+	TxID        int64 `gorm:"primaryKey;autoIncrement;"`
+	CreatedAt   time.Time
 	Date        string
 	Time        string
-	PaymentType payments.PaymentType
-	TxList      []items.Item // TxList
-	Total       decimal.Decimal
+	PaymentType payments.PaymentType `gorm:"embedded"`
+	TxList      string               //[]items.Item
+	Total       string               //decimal.Decimal
 }
 
 func NewTrx(paymentMethod payments.PaymentType, list []items.Item, total decimal.Decimal) Transaction {
@@ -39,13 +41,17 @@ func NewTrx(paymentMethod payments.PaymentType, list []items.Item, total decimal
 	time := timeNow.Format("15:04:05")
 	txId := timeNow.Unix()
 
+	txlistJSON, _ := json.Marshal(list)
+
+	totalString := total.StringFixed(2)
+
 	trans := Transaction{
 		TxID:        txId,
 		Date:        date,
 		Time:        time,
 		PaymentType: paymentMethod,
-		TxList:      list,
-		Total:       total,
+		TxList:      string(txlistJSON), //list,
+		Total:       totalString,        //total,
 	}
 
 	return trans

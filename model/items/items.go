@@ -19,8 +19,22 @@ type Item struct {
 	ID          int64
 	QTY         int64
 	Description string
-	UnitCost    decimal.Decimal
-	Price       decimal.Decimal
+	UnitCost    string //decimal.Decimal
+	Price       string //decimal.Decimal
+}
+
+func NewItem(id int64, qty int64, description string, unit decimal.Decimal, price decimal.Decimal) Item {
+
+	uc := unit.StringFixed(2)
+	p := price.StringFixed(2)
+
+	return Item{
+		ID:          id,
+		QTY:         qty,
+		Description: description,
+		UnitCost:    uc,
+		Price:       p,
+	}
 }
 
 // type Stock struct{}
