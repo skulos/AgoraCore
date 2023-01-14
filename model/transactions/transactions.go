@@ -29,7 +29,7 @@ type Transaction struct {
 	CreatedAt   time.Time
 	Date        string
 	Time        string
-	PaymentType payments.PaymentType `gorm:"embedded"`
+	PaymentType payments.PaymentType //`gorm:"embedded"`
 	TxList      string               //[]items.Item
 	Total       string               //decimal.Decimal
 }
