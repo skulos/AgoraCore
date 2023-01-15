@@ -4,7 +4,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/skulos/AgoraCore/model/payments"
 	"github.com/skulos/AgoraCore/model/transactions"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -42,7 +41,7 @@ var months [12]string = [12]string{
 }
 
 // https://gorm.io/docs/conventions.html#Temporarily-specify-a-name
-func TableNames() {
+func loadtableNames() {
 
 	yearInt := time.Now().Year()
 	yearString := strconv.Itoa(yearInt) + "_"
@@ -64,15 +63,31 @@ func DBInit() {
 	// Migrate the schema
 	// db.AutoMigrate(&transactions.Transaction{})
 
-	db.Create(&transactions.Transaction{
-		Date:        "07-01-2023",
-		Time:        "06:10 PM",
-		PaymentType: payments.Cash,
-		TxList:      "[]",
-		Total:       "0.00",
-	})
+	// db.Create(&transactions.Transaction{
+	// 	Date:        "07-01-2023",
+	// 	Time:        "06:10 PM",
+	// 	PaymentType: payments.Cash,
+	// 	TxList:      "[]",
+	// 	Total:       "0.00",
+	// })
 
-	TableNames()
+	loadtableNames()
 	// db.Delete()
+
+	// db.Table("2023_january").Create(&transactions.Transaction{
+	// 	Date:        "07-01-2023",
+	// 	Time:        "06:10 PM",
+	// 	PaymentType: payments.Cash,
+	// 	TxList:      "[]",
+	// 	Total:       "0.00",
+	// })
+
+	// db.Table("2023_january").Create(&transactions.Transaction{
+	// 	Date:        "07-01-2023",
+	// 	Time:        "06:10 PM",
+	// 	PaymentType: payments.Cash,
+	// 	TxList:      "[]",
+	// 	Total:       "0.00",
+	// })
 
 }
