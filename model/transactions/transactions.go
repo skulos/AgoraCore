@@ -26,19 +26,24 @@ Total
 // DateTime time.Time
 type Transaction struct {
 	TxID        int64 `gorm:"primaryKey;autoIncrement;"`
-	CreatedAt   time.Time
 	Date        string
 	Time        string
 	PaymentType payments.PaymentType //`gorm:"embedded"`
 	TxList      string               //[]items.Item
 	Total       string               //decimal.Decimal
+	// CreatedAt   time.Time
 }
 
 func NewTrx(paymentMethod payments.PaymentType, list []items.Item, total decimal.Decimal) Transaction {
 	timeNow := time.Now()
 
+	// y, m, d := timeNow.Date()
+	// date := time.Date(y, m, d, 0, 0, 0, 0, time.UTC)
+
 	date := timeNow.Format("01-02-2006")
-	time := timeNow.Format("15:04:05")
+	// dateLayout := "Mon Jan 02 2006 15:04:05 GMT-0700"
+
+	time := timeNow.Format("15:04:05 PM")
 	txId := timeNow.Unix()
 
 	txlistJSON, _ := json.Marshal(list)

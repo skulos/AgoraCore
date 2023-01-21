@@ -1,10 +1,10 @@
 package payments
 
-type PaymentType uint
+type PaymentType string
 
 const (
-	Cash PaymentType = iota + 1
-	Card
-	Account
-	Returns
+	Cash    PaymentType = "Cash"
+	Card    PaymentType = "Card"
+	Account PaymentType = "Account"
+	Returns PaymentType = "Returns"
 )
