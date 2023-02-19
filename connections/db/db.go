@@ -1,6 +1,7 @@
 package db
 
 import (
+	"log"
 	"strconv"
 	"strings"
 	"time"
@@ -67,10 +68,16 @@ func getTransactionTableName() string {
 func loadAccountTableNames() {
 	db.AutoMigrate(&accounts.Accounts{})
 
+	db.Create(&accounts.Accounts{Name: "Asset", Type: accounts.Assets})
+	db.Create(&accounts.Accounts{Name: "Capital", Type: accounts.Capitals})
+	db.Create(&accounts.Accounts{Name: "Liability", Type: accounts.Liabilities})
+
 	// Get all records
 	var accounts []accounts.Accounts
-	result := db.Find(&accounts)
+	// result := db.Find(&accounts)
+	db.Find(&accounts)
 
+	log.Println(accounts)
 }
 
 func DBInit() {
